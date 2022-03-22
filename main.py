@@ -1,10 +1,9 @@
 lexemas = []
 tokens=[]
 ct=1
+ids=[]
 lista_f = []
-id = 1
 operadores = ['+','*','=']
-isalpha = []
 while True:
     entrada = str(input('DIGITE UM LEXEMA'))
     lista = list(entrada)
@@ -17,16 +16,18 @@ while True:
     print(lista)
 
     for i in lista:
-        if i.isalpha() == True and i not in isalpha:
+        if i.isalpha() == True and i not in lexemas:
             lista_f.append(f'<id,{ct}>')
+            lexemas.append(i)
+            ids.append(ct)
             ct += 1
-            isalpha.append(i)
         elif i.isdigit() == True:
             lista_f.append(f'<{i}>')
         elif i.isascii() == True and i in operadores:
            lista_f.append(f'<{i}>')
-        elif i in isalpha:
-            lista_f.append()
+        elif i in lexemas:
+            lista_f.append(f'<id,{lexemas.index(i)+1}>')
+            continue
         else:
             lista_f.append('<erro>')
     break
